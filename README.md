@@ -1,4 +1,6 @@
-# ⚡ Copilot Remote
+# ⚡ RAD Collaboration Hub
+
+> **Based on [copilot-remote](https://github.com/kubestellar/copilot-remote) by [Andy Anderson](https://github.com/clubanderson) / [KubeStellar](https://github.com/kubestellar) — Apache 2.0 licensed. See [NOTICE](NOTICE) and [CHANGES.md](CHANGES.md) for full attribution and list of modifications.**
 
 Control your AI coding agents from literally anywhere. Manage Copilot CLI and Claude Code sessions, run multiple agents side-by-side in tiled web terminals, queue up tasks and let them auto-dispatch across your agents, drag images straight into terminals, and stream everything in real-time — all from your phone or any browser on your local network.
 
