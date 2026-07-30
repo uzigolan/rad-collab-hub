@@ -43,8 +43,18 @@ class AcpManager extends EventEmitter {
   private async createAcpSession(sessionId: string): Promise<AcpSession> {
     const copilotPath = process.env.COPILOT_PATH || 'copilot';
 
-    const proc = spawn(copilotPath, ['--acp', '--allow-all'], {
-      cwd: process.env.HOME || '/',
+    // Build ACP args. Skills in ~/.copilot/skills/ are loaded automatically by
+    // the CLI and can override Copilot's default behaviour (e.g. RAD skills that
+    // require MCP tools which may not be available). Setting --no-skills disables
+    // that. Set COPILOT_LOAD_SKILLS=true in env to re-enable when MCP tools are
+    // connected and you want skill-guided behaviour.
+    const loadSkills = process.env.COPILOT_LOAD_SKILLS === 'true';
+    const acpArgs = loadSkills
+      ? ['--acp', '--allow-all']
+      : ['--acp', '--allow-all', '--no-skills'];
+
+    const proc = spawn(copilotPath, acpArgs, {
+      cwd: process.env.HOME || process.env.USERPROFILE || '/',
       env: process.env,
       stdio: ['pipe', 'pipe', 'inherit'],
     });

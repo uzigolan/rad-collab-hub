@@ -52,7 +52,10 @@ class SessionManager extends EventEmitter {
     }
 
     const copilotPath = process.env.COPILOT_PATH || 'copilot';
-    const cwd = opts.cwd || process.env.HOME || '/';
+    const cwd = opts.cwd || process.env.HOME || process.env.USERPROFILE || '/';
+
+    const loadSkills = process.env.COPILOT_LOAD_SKILLS === 'true';
+    if (!loadSkills) args.push('--no-skills');
 
     const proc = spawn(copilotPath, args, {
       cwd,
